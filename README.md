@@ -3,6 +3,6 @@ A public implementation of an Human Activity Recognition (HAR) android applicati
   
 Authors:  
 *Gabriele Gamberi*  
-*Antonio Spoleto*
+*Antonio Spoleto Junior*
   
 ![](preview.gif)
