@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">Human Activity Recognition</string>
+    <string name="accelTitle">Accelerometer</string>
+    <string name="gyroTitle">Gyroscope</string>
+    <string name="prediction">BEGIN\nRECOGNITION</string>
+    <string name="predictionIcon" />
+    <string name="stopButton">STOP RECOGNITION</string>
+    <string name="HARNavTitle">HAR Project</string>
+    <string name="HARNavSubTitle">Gabriele Gamberi\nAntonio Spoleto</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
+
+    <string name="livePlot">REALTIME PLOTS</string>
+    <string name="staticPlot">PREPROCESSED PLOTS</string>
+    <string name="dynamicAccelTitle">Acceleration</string>
+    <string name="dynamicGyroTitle">Gyroscope</string>
+    <string name="staticAccelTitle">Acceleration</string>
+    <string name="staticGyroTitle">Gyroscope</string>
+    <string name="startButton">RECORD</string>
+    <string name="saveButton">SAVE</string>
+    <string name="discardButton">DISCARD</string>
+    <string name="countdownText" />
+
+</resources>

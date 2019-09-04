@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="actionBar">#1C3F67</color>
+    <color name="myGreen">#3BEBC3</color>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+    <color name="myGrey">#4A5C69</color>
+    <color name="myBlack">#2b3036</color>
+    <color name="myCyan">#60c7ed</color>
+    <color name="myBlue">#4d81d5</color>
+    <color name="myBlueDark1">#253e66</color>
+    <color name="myBlueDark2">#121f33</color>
+    <color name="myViolet">#7341B4</color>
+    <color name="deepPurple">#673ab7</color>
+    <color name="indigo">#303f9f</color>
+    <color name="lightBlue">#03a9f4</color>
+    <color name="teal">#009688</color>
+    <color name="green">#009688</color>
+    <color name="lightGreen">#4caf50</color>
+    <color name="orange">#eaad43</color>
+    <color name="red">#e03333</color>
+    <color name="grassGreen" >#2ed32e</color>
+    <color name="seaBlu">#004c74</color>
+</resources>

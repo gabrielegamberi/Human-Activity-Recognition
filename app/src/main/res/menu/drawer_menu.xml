@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/my_menu">
+    <item android:title="Functionalities">
+        <menu>
+            <group
+                android:checkable="true"
+                android:checkableBehavior="single">
+                <item
+                    android:id="@+id/har_recognition"
+                    android:icon="@drawable/ic_human"
+                    android:onClick="changeActivity"
+                    android:title="Recognition" />
+                <item
+                    android:id="@+id/har_acquisition"
+                    android:icon="@drawable/ic_data_acquisition"
+                    android:onClick="changeActivity"
+                    android:title="Data Acquisition" />
+            </group>
+        </menu>
+    </item>
+    <item android:title="Settings">
+        <menu>
+            <item
+                android:id="@+id/settings_sound"
+                android:icon="@drawable/ic_hearing"
+                android:title="Sound"
+                app:actionLayout="@layout/sound_switch">
+            </item>
+            <item
+                android:id="@+id/settings_phone_number"
+                android:icon="@drawable/ic_phone"
+                android:title="Contact to notify"
+                android:onClick="selectContact">
+            </item>
+        </menu>
+    </item>
+
+</menu>
