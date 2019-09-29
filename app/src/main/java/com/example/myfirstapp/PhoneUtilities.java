@@ -17,6 +17,7 @@ import static android.app.Activity.RESULT_OK;
 public class PhoneUtilities {
 
     public static final int RESULT_PICK_CONTACT =1;
+    private static String staticPhoneNo;
 
     //Load phone number from Shared Preferences
     public static void loadPhoneNo(Activity activity){
@@ -25,6 +26,7 @@ public class PhoneUtilities {
         NavigationView navigationView = activity.findViewById(R.id.navigation_view);
         MenuItem contact = navigationView.getMenu().findItem(R.id.settings_phone_number);
         contact.setTitle(phoneNo);
+        staticPhoneNo = phoneNo;
     }
 
     //Save phone number into Shared Preferences
@@ -33,6 +35,11 @@ public class PhoneUtilities {
         SharedPreferences sp = activity.getSharedPreferences("settings", MainActivity.MODE_PRIVATE);
         SharedPreferences.Editor editor = sp.edit();
         editor.putString("phone_number", phoneNo);
+        staticPhoneNo = phoneNo;
         editor.commit();
+    }
+
+    public static String getPhoneNo(){
+        return staticPhoneNo;
     }
 }

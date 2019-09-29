@@ -4,13 +4,17 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+
+import android.Manifest;
 import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
+import android.content.pm.PackageManager;
 import android.content.res.AssetFileDescriptor;
 import android.database.Cursor;
 import android.graphics.Color;
@@ -24,6 +28,7 @@ import android.net.Uri;
 import android.os.Handler;
 import android.os.Message;
 import android.provider.ContactsContract;
+import android.telephony.SmsManager;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
@@ -44,9 +49,15 @@ import com.varunest.sparkbutton.SparkButton;
 import com.varunest.sparkbutton.SparkEventListener;
 import java.io.IOException;
 import java.io.InputStream;
+import java.time.Duration;
+import java.time.Instant;
 
 public class MainActivity extends AppCompatActivity implements SensorEventListener
 {
+    //MESSAGE
+    private final int SEND_SMS_PERMISSION_REQUEST_MODE = 1;
+    private boolean noMoreHelp = false;
+    private Instant previousFall;
     //PREDICTION TEXT & ICON
     public TextView predictionText;
     private ImageView predictionIcon;
@@ -234,7 +245,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
         //Load Phone Number
         PhoneUtilities.loadPhoneNo(this);
-
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.SEND_SMS}, SEND_SMS_PERMISSION_REQUEST_MODE);
     }
 
     @Override
@@ -362,6 +373,27 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         startActivityForResult (in, PhoneUtilities.RESULT_PICK_CONTACT);
     }
 
+    public boolean sendHelpMessage(){
+        String phoneNo = PhoneUtilities.getPhoneNo();
+        String message = "Please, I've fallen... help me out!";
+        if(phoneNo.isEmpty())
+            return false;
+        if(checkPermissions((Manifest.permission.SEND_SMS))){
+            SmsManager smsManager = SmsManager.getDefault();
+            smsManager.sendTextMessage(phoneNo, null, message, null, null);
+            Toast.makeText(this, "Help message sent!", Toast.LENGTH_SHORT).show();
+            return true;
+        }else{
+            Toast.makeText(this, "Permission denied!", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+    }
+
+    public boolean checkPermissions(String permission){
+        int check = ContextCompat.checkSelfPermission(this, permission);
+        return (check == PackageManager.PERMISSION_GRANTED);
+    }
+
 
     //Handler that handles the messages coming from the Classifier
     private class UIHandler extends Handler{
@@ -415,6 +447,24 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
                     }
                     catch(IOException ex) {return;}
+
+                    //Request help (just once)
+                    if(predictionText.getText().equals("FALLING")){
+                        Instant start = Instant.now();
+                        if(previousFall==null)
+                            previousFall = start;
+
+                        Duration timeElapsed = Duration.between(previousFall, start);
+                        if(timeElapsed.toMinutes()>=5)
+                            noMoreHelp = false;
+
+                        //Send a message after 5 minutes from last fall
+                        if((noMoreHelp == false && timeElapsed.toMinutes()<5) && sendHelpMessage() == true){
+                            previousFall = Instant.now();
+                            noMoreHelp = true;
+                        }
+                    }
+
                 }
                 sparkButton.clearAnimation();
                 sparkButton.setVisibility(View.INVISIBLE);
