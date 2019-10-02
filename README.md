@@ -1,5 +1,5 @@
 # Human-Activity-Recognition
-A public implementation of an Human Activity Recognition (HAR) android application, based on a convolutional neural network (CNN):
+A public android application for Human Activity Recognition (HAR) based on a Convolutional Neural Network:
   
 Authors:  
 *Gabriele Gamberi*  
