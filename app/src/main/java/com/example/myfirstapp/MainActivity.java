@@ -375,13 +375,13 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
     public boolean sendHelpMessage(){
         String phoneNo = PhoneUtilities.getPhoneNo();
-        String message = "Please, I've fallen... help me out!";
+        String message = "HELP ME, I've fallen and I can't get up!";
         if(phoneNo.isEmpty())
             return false;
         if(checkPermissions((Manifest.permission.SEND_SMS))){
             SmsManager smsManager = SmsManager.getDefault();
             smsManager.sendTextMessage(phoneNo, null, message, null, null);
-            Toast.makeText(this, "Help message sent!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Help request sent!", Toast.LENGTH_SHORT).show();
             return true;
         }else{
             Toast.makeText(this, "Permission denied!", Toast.LENGTH_SHORT).show();
